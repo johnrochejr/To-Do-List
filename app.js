@@ -43,7 +43,26 @@ app.get('/', (request,response) => {
   response.render('home', todos);
 });
 
+// Test todos2 (received help)
 
+app.get('/todos2', (request, response) => {
+  let finishedTasks = todos2.todos2.filter(todo => todo.status === 'completed');
+  let unfinishedTasks = todos2.todos2.filter(todo => todo.status === 'pending')
+
+  let completionList = {
+    completed: [],
+    pending: []
+  }
+
+  completionList.completed = finishedTasks;
+  completionList.pending = unfinishedTasks;
+
+  console.log(todos);
+  console.log(completionList);
+
+  response.render('home', completionList)
+
+})
 
 
 

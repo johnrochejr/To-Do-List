@@ -14,7 +14,7 @@
         <button type="submit" name="todo">Add</button>
       </form>
     </div>
-    <div class="pendingTask">
+    <!-- <div class="pendingTask">
       <h4>Pending</h4>
       <ul>
         {{#pending}}
@@ -24,15 +24,35 @@
           </form>
         </li>
         {{/pending}}
+      </ul> -->
+      <h3>Pending - Todo2 (test)</h3>
+      <ul>
+        {{#pending}}
+        <li>
+          <form action="/notDone/{{.}}" method="post">
+            <button type="submit">This is complete</button> {{item}}
+          </form>
+        </li>
+        {{/pending}}
       </ul>
     </div>
       <div class="completedTask">
-        <h4>Done</h4>
+        <!-- <h4>Done</h4>
         <ul>
           {{#completed}}
           <li>
             <form action="/notDone/{{.}}" method="post">
               <button type="submit">Undo</button> <del>{{.}}</del>
+            </form>
+          </li>
+          {{/completed}}
+        </ul> -->
+        <h3>Complete - Todo2 (test)</h3>
+        <ul>
+          {{#completed}}
+          <li>
+            <form action="/notDone/{{.}}" method="post">
+              <button type="submit">Undo</button> <del>{{item}}</del>
             </form>
           </li>
           {{/completed}}
