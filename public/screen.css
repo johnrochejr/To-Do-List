@@ -1,0 +1,18 @@
+body {
+  font-family: Helvetica;
+  width: 100%;
+  margin: 1em;
+}
+
+h3 {
+  font-size: 2em;
+  color: 	#1E90FF;
+}
+
+p {
+  font-size: 1em;
+}
+
+input, button {
+  padding: 1em;
+}

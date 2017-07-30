@@ -3,8 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>To-Do List</title>
+    <link rel="stylesheet" href="/screen.css">
   </head>
   <body>
-    <h1>What up we are reloading from mustache!</h1>
+    <div class="container">
+      <h3>To-Do List</h3>
+      <form action="" method="post">
+        <p>What's up for today?</p>
+        <input type="text" name="todo" placeholder="Tasks">
+        <button type="submit">Add</button>
+      </form>
+    </div>
+    <div class="container">
+    </div>
   </body>
 </html>
