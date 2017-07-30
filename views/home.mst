@@ -25,11 +25,11 @@
         </li>
         {{/pending}}
       </ul> -->
-      <h3>Pending - Todo2 (test)</h3>
+      <h4>Pending</h4>
       <ul>
         {{#pending}}
         <li>
-          <form action="/notDone/{{.}}" method="post">
+          <form action="/completedTasks/{{id}}" method="post">
             <button type="submit">This is complete</button> {{item}}
           </form>
         </li>
@@ -47,11 +47,11 @@
           </li>
           {{/completed}}
         </ul> -->
-        <h3>Complete - Todo2 (test)</h3>
+        <h4>Complete</h4>
         <ul>
           {{#completed}}
           <li>
-            <form action="/notDone/{{.}}" method="post">
+            <form action="/notDone/{{id}}" method="post">
               <button type="submit">Undo</button> <del>{{item}}</del>
             </form>
           </li>

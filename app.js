@@ -1,11 +1,22 @@
 const express = require('express');
-const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const mustacheExpress = require('mustache-express');
 
 const app = express();
 
 app.use(express.static('public'));
+
+// Test
+
+let todos2 = {
+  todos2: [
+    { id: 0, item: 'Drink coffee', status: 'completed' },
+    { id: 1, item: 'Read the news', status: 'pending' },
+    { id: 2, item: 'Get some exercise', status: 'pending' },
+    { id: 3, item: 'Work on TIY stuff', status: 'pending'}
+  ]
+};
 
 // create data
 
@@ -21,15 +32,6 @@ let todos = {
   ]
 }
 
-// Test
-
-let todos2 = {
-  todos2: [
-    { id: 0, item: 'Drink coffee', status: 'completed' },
-    { id: 1, item: 'Read the news', status: 'pending' },
-    { id: 2, item: 'Get some exercise', status: 'pending' }
-  ]
-};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded ({extended: false}));
@@ -60,7 +62,7 @@ app.get('/todos2', (request, response) => {
   console.log(todos);
   console.log(completionList);
 
-  response.render('home', completionList)
+  response.render('home', completionList);
 
 })
 
@@ -69,24 +71,41 @@ app.get('/todos2', (request, response) => {
 // new task
 
 app.post('/newTodo', (request, response) => {
+//   todos.pending.push(newTask);
+//   response.redirect('/');
+// });
   let newTask = request.body.todo;
-  todos.pending.push(newTask);
-  response.redirect('/');
+  let id = todos2.todos2.length;
+  todos2.todos2[id] = { id: id, item: newTask, status: 'pending' };
+  response.redirect('/todos2');
 });
+
 
 // complete task
 
-app.post('/completedTasks/:completeTask', (request, response) => {
-  let completeTask = request.params.completeTask;
-  todos.pending.push(pendingTask);
+// app.post('/completedTasks/:completeTask', (request, response) => {
+//   let completeTask = request.params.completeTask;
+//   todos.pending.push(pendingTask);
+// });
+
+app.post('/completedTasks/:id', (request, response) => {
+  let id = request.params.id;
+  todos2.todos2[id].status = 'completed';
+  response.redirect('/todos2');
 });
 
 // pending
 
-app.post('/notDone/:pendingTask', (request, response) => {
-  let pendingTask = request.params.pendingTask;
-  todos.pending.push(pendingTask);
-})
+// app.post('/notDone/:pendingTask', (request, response) => {
+//   let pendingTask = request.params.pendingTask;
+//   todos.pending.push(pendingTask);
+// });
+
+app.post('/notDone/:id', (request, response) => {
+  let id = request.params.id;
+  todos2.todos2[id].status = 'pending'
+  response.redirect('/todos2');
+});
 
 app.listen(3000, () => {
   console.log('Listen up port 3000!');
