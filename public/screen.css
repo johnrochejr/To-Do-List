@@ -1,7 +1,7 @@
 body {
   font-family: Helvetica;
   width: 100%;
-  margin: 1em;
+  margin: 5em;
 }
 
 h3 {
@@ -18,11 +18,27 @@ p {
   font-size: 1em;
 }
 
-input, button {
-  padding: 1em;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+.newTask input, button {
+  padding: 1em;
+}
+
+.newTask input {
+  width: 20em;
+}
+
+.pendingTask button {
+  border-radius: .2em;
+  background-color: #3CB371;
+  color: #DCDCDC;
+  margin-top: .2em;
+}
+
+.completedTask button {
+  border-radius: .2em;
+  margin-top: .2em;
 }

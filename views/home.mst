@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/screen.css">
   </head>
   <body>
-    <div class="container">
+    <div class="newTask">
       <h3>To-Do List</h3>
       <form action="/newTodo/{{todo}}" method="post">
         <p>What's up for today?</p>
@@ -14,7 +14,7 @@
         <button type="submit" name="todo">Add</button>
       </form>
     </div>
-    <div class="container">
+    <div class="pendingTask">
       <h4>Pending</h4>
       <ul>
         {{#pending}}
@@ -26,13 +26,13 @@
         {{/pending}}
       </ul>
     </div>
-      <div class="container">
+      <div class="completedTask">
         <h4>Done</h4>
         <ul>
           {{#completed}}
           <li>
             <form action="/notDone/{{.}}" method="post">
-              <button type="submit">Not Done</button>
+              <button type="submit">Undo</button> <del>{{.}}</del>
             </form>
           </li>
           {{/completed}}
