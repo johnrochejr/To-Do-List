@@ -5,8 +5,13 @@ body {
 }
 
 h3 {
-  font-size: 2em;
+  font-size: 2.3em;
   color: 	#1E90FF;
+}
+
+h4 {
+  font size: 1.3em;
+  color: #778899;
 }
 
 p {
@@ -15,4 +20,9 @@ p {
 
 input, button {
   padding: 1em;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }

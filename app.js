@@ -10,13 +10,13 @@ app.use(express.static('public'));
 
 let todos = {
   completed: [
-    { id: 0, task: "Drink coffee" },
-    { id: 1, task: "Read the news" },
-    { id: 2, task: "Get some exercise"}
+    "Drink coffee",
+    "Read the news",
+    "Get some exercise"
   ],
   pending: [
-    { id: 3, task: "Work on TIY stuff" },
-    { id: 4, task: "Dinner with sis @ 7p" }
+    "Work on TIY stuff",
+    "Dinner with sis @ 7p"
   ]
 }
 
@@ -34,6 +34,16 @@ app.set('view engine', 'mst');
 app.get('/', (request,response) => {
   response.render('home', todos);
 });
+
+app.post('/newTodo', (request, response) => {
+  let newTask = request.body.todo;
+  todos.pending.push(newTask);
+  response.redirect('/');
+});
+
+app.post('/completedTasks/:completeTask', (request, response) => {
+  let completeTask = request.params.completeTask
+})
 
 app.listen(3000, () => {
   console.log('Listen up port 3000!');

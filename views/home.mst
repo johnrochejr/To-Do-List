@@ -15,7 +15,7 @@
       </form>
     </div>
     <div class="container">
-      <h3>Pending</h3>
+      <h4>Pending</h4>
       <ul>
         {{#pending}}
         <li>
@@ -26,5 +26,17 @@
         {{/pending}}
       </ul>
     </div>
+      <div class="container">
+        <h4>Done</h4>
+        <ul>
+          {{#completed}}
+          <li>
+            <form action="/notDone/{{.}}" method="post">
+              <button type="submit">Not Done</button>
+            </form>
+          </li>
+          {{/completed}}
+        </ul>
+      </div>
   </body>
 </html>
