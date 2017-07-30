@@ -8,13 +8,23 @@
   <body>
     <div class="container">
       <h3>To-Do List</h3>
-      <form action="" method="post">
+      <form action="/newTodo/{{todo}}" method="post">
         <p>What's up for today?</p>
         <input type="text" name="todo" placeholder="Tasks">
-        <button type="submit">Add</button>
+        <button type="submit" name="todo">Add</button>
       </form>
     </div>
     <div class="container">
+      <h3>Pending</h3>
+      <ul>
+        {{#pending}}
+        <li>
+          <form action="/completedTasks/{{.}}" method="post">
+            <button type="submit">Done</button> {{.}}
+          </form>
+        </li>
+        {{/pending}}
+      </ul>
     </div>
   </body>
 </html>

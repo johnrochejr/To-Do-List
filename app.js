@@ -1,5 +1,6 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -19,12 +20,19 @@ let todos = {
   ]
 }
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded ({extended: false}));
+
 app.engine('mst', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mst');
 
+// app.post('/newTodo', (request, response) => {
+//
+// })
+
 app.get('/', (request,response) => {
-  response.render('home');
+  response.render('home', todos);
 });
 
 app.listen(3000, () => {
