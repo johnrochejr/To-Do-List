@@ -1,0 +1,21 @@
+Questions for review:
+- Arrays
+- request/response cycle
+- route handlers
+- packages
+- '/' vs '/home'
+- response.render
+- response.redirect
+- post requests
+- next();
+- stack middleware
+- write templates and handlers
+- req.body.something
+- error messages in validation
+- HTML options for buttons
+- Morgan, logging
+
+To-do list
+- sessions
+- logic
+- saving data

@@ -7,8 +7,6 @@ const app = express();
 
 app.use(express.static('public'));
 
-// Test
-
 let todos2 = {
   todos2: [
     { id: 0, item: 'Drink coffee', status: 'completed' },
@@ -17,8 +15,6 @@ let todos2 = {
     { id: 3, item: 'Work on TIY stuff', status: 'pending'}
   ]
 };
-
-// create data
 
 let todos = {
   completed: [
@@ -32,7 +28,6 @@ let todos = {
   ]
 }
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded ({extended: false}));
 
@@ -44,8 +39,6 @@ app.set('view engine', 'mst');
 app.get('/', (request,response) => {
   response.render('home', todos);
 });
-
-// Test todos2 (received help)
 
 app.get('/todos2', (request, response) => {
   let finishedTasks = todos2.todos2.filter(todo => todo.status === 'completed');
@@ -66,40 +59,19 @@ app.get('/todos2', (request, response) => {
 
 })
 
-
-
-// new task
-
 app.post('/newTodo', (request, response) => {
-//   todos.pending.push(newTask);
-//   response.redirect('/');
-// });
+
   let newTask = request.body.todo;
   let id = todos2.todos2.length;
   todos2.todos2[id] = { id: id, item: newTask, status: 'pending' };
   response.redirect('/todos2');
 });
 
-
-// complete task
-
-// app.post('/completedTasks/:completeTask', (request, response) => {
-//   let completeTask = request.params.completeTask;
-//   todos.pending.push(pendingTask);
-// });
-
 app.post('/completedTasks/:id', (request, response) => {
   let id = request.params.id;
   todos2.todos2[id].status = 'completed';
   response.redirect('/todos2');
 });
-
-// pending
-
-// app.post('/notDone/:pendingTask', (request, response) => {
-//   let pendingTask = request.params.pendingTask;
-//   todos.pending.push(pendingTask);
-// });
 
 app.post('/notDone/:id', (request, response) => {
   let id = request.params.id;
