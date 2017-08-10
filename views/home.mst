@@ -8,55 +8,26 @@
   <body>
     <div class="newTask">
       <h3>To-Do List</h3>
-      <form action="/newTodo/{{todo}}" method="post">
+      <form action="/addTodo/" method="post">
         <p>What's up for today?</p>
-        <input type="text" name="todo" placeholder="Tasks">
+        <input type="text" name="description" placeholder="Tasks">
         <button type="submit" name="todo">Add</button>
       </form>
     </div>
-    <!-- <div class="pendingTask">
-      <h4>Pending</h4>
-      <ul>
         {{#pending}}
         <li>
-          <form action="/completedTasks/{{.}}" method="post">
-            <button type="submit">Done</button> {{.}}
-          </form>
-        </li>
-        {{/pending}}
-      </ul> -->
-      <h4>Pending</h4>
-      <ul>
-        {{#pending}}
-        <li>
-          <form action="/completedTasks/{{id}}" method="post">
-            <button type="submit">This is complete</button> {{item}}
+          <form action="/complete" method="post">
+            <button type="submit" name="id" value="{{id}}">Done</button>
+            <label>{{description}}</label>
           </form>
         </li>
         {{/pending}}
       </ul>
-    </div>
-      <div class="completedTask">
-        <!-- <h4>Done</h4>
-        <ul>
-          {{#completed}}
-          <li>
-            <form action="/notDone/{{.}}" method="post">
-              <button type="submit">Undo</button> <del>{{.}}</del>
-            </form>
-          </li>
-          {{/completed}}
-        </ul> -->
-        <h4>Complete</h4>
-        <ul>
-          {{#completed}}
-          <li>
-            <form action="/notDone/{{id}}" method="post">
-              <button type="submit">Undo</button> <del>{{item}}</del>
-            </form>
-          </li>
-          {{/completed}}
-        </ul>
-      </div>
+      <p>Completed Items</p>
+      <ul class="complete">
+        {{#completed}}
+        <li>{{description}}</li>
+        {{/completed}}
+      </ul>
   </body>
 </html>

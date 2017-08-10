@@ -15,8 +15,6 @@ app.engine('mst', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mst');
 
-app.use(expressValidator());
-
 app.use(
   expressSession({
     secret: 'tame impala',
@@ -24,15 +22,6 @@ app.use(
     saveUnitialized: true
   })
 );
-
-// let todos = {
-//   todos: [
-//     { id: 0, item: 'Drink coffee', status: 'completed' },
-//     { id: 1, item: 'Read the news', status: 'pending' },
-//     { id: 2, item: 'Get some exercise', status: 'pending' },
-//     { id: 3, item: 'Work on TIY stuff', status: 'pending'}
-//   ]
-// };
 
 app.get('/', (request,response) => {
   const todoList = request.session.todoList || [];
@@ -44,43 +33,27 @@ app.get('/', (request,response) => {
   response.render('home', todos);
 });
 
-app.get('/todos', (request, response) => {
-  let finishedTasks = todos.todos.filter(todo => todo.status === 'completed');
-  let unfinishedTasks = todos.todos.filter(todo => todo.status === 'pending')
+app.post('/addTodo', (request, response) => {
+  const todoList = request.session.todoList || [];
+  const description = request.body.description;
 
-  let completionList = {
-    completed: [],
-    pending: []
+  todoList.push({ id: todoList.length + 1, completed: false,
+  description: description });
+
+  request.session.todoList = todoList;
+  response.redirect('/');
+});
+
+app.post('/complete', (request, response) => {
+  const todoList = request.session.todoList || [];
+  const id = parseInt(request.body.id);
+  const todo = todoList.find(todo => todo.id === id);
+
+  if (todo) {
+    todo.completed = true;
+    request.session.todoList;
   }
-
-  completionList.completed = finishedTasks;
-  completionList.pending = unfinishedTasks;
-
-  console.log(todos);
-  console.log(completionList);
-
-  response.render('home', completionList);
-
-})
-
-app.post('/newTodo', (request, response) => {
-
-  let newTask = request.body.todo;
-  let id = todos.todos.length;
-  todos.todos[id] = { id: id, item: newTask, status: 'pending' };
-  response.redirect('/todos');
-});
-
-app.post('/completedTasks/:id', (request, response) => {
-  let id = request.params.id;
-  todos.todos[id].status = 'completed';
-  response.redirect('/todos');
-});
-
-app.post('/notDone/:id', (request, response) => {
-  let id = request.params.id;
-  todos.todos[id].status = 'pending'
-  response.redirect('/todos');
+  response.redirect('/');
 });
 
 app.listen(3000, () => {
